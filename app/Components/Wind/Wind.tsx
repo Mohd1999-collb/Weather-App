@@ -32,7 +32,7 @@ const Wind = () => {
             alt="arrow"
             width={9}
             height={9}
-            className="absolute top-0 left-[45%] transition-all duration-500 ease-in-out dark:invert"
+            className="absolute top-0 left-[47%] transition-all duration-500 ease-in-out dark:invert"
             style={{
               transform: `rotate(${windDirection}deg) translate(-50%)`,
               height: "110%",

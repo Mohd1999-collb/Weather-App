@@ -65,7 +65,6 @@ export const GlobalContextProvider = ({ children }) => {
     const fetchUvIndex = async (lat, lon) => {
         try {
             const response = await axios.get(`api/uv?lat=${lat}&lon=${lon}`);
-            console.log("UV Index Data:", response.data);
             setUvIndex(response.data);
         } catch (error) {
             console.error("Error fetching uv data:", error.message);
