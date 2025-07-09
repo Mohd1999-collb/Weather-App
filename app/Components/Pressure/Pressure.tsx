@@ -14,8 +14,6 @@ const Pressure = () => {
 
   const { pressure } = forecast.main;
 
-  console.log(forecast.main)
-
   return (
     <div className="pt-6 pb-5 px-4 h-[12rem] border rounded-lg flex flex-col gap-5 dark:bg-dark-grey shadow-sm dark:shadow-none">
           <div className="top">

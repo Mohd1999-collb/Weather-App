@@ -20,7 +20,7 @@ const Visibility = () => {
         </h2>
         <p className="pt-4 text-2xl">{Math.round(visibility / 1000)} km</p>
       </div>
-      <p className="text-sm">{getVisibilityDescription(visibility)}.</p>
+      <p className="text-sm">{getVisibilityDescription(visibility)}</p>
     </div>
   );
 };

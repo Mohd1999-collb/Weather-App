@@ -12,6 +12,8 @@ import FeelsLike from "./Components/FeelsLike/FeelsLike";
 import Humidity from "./Components/Humidity/Humidity";
 import Visibility from "./Components/Visibility/Visibility";
 import Pressure from "./Components/Pressure/Pressure";
+import MapBox from "./Components/MapBox/MapBox";
+import TopLargeCity from "./Components/TopLargeCity/TopLargeCity";
 export default function Home() {
 
   return (
@@ -35,6 +37,10 @@ export default function Home() {
           <Humidity/>
           <Visibility/>
           <Pressure/>
+        </div>
+        <div className="mapbox-con mt-4 flex gap-4">
+          <MapBox/>
+          <TopLargeCity/>
         </div>
         </div>
         

@@ -1,4 +1,5 @@
 import moment from "moment";
+import { useGlobalContextUpdate } from "../Context/globalContext";
 
 export const kelvinToCelsius = (kelvin: number): number => {
   return Math.round(kelvin - 273.15);
@@ -54,15 +55,15 @@ export const getHumidityText = (humidity: number) => {
 export const getVisibilityDescription = (visibility: number) => {
     const visibilityInKm = Math.round(visibility / 1000);
 
-    if (visibilityInKm > 10) return "Excellent: Clear and vast view";
-    if (visibilityInKm > 5) return "Good: Easily navigable";
-    if (visibilityInKm > 2) return "Moderate: Some limitations";
-    if (visibilityInKm <= 2) return "Poor: Restricted and unclear";
-    return "Unavailable: Visibility data not available";
+    if (visibilityInKm > 10) return "Excellent: Clear and vast view.";
+    if (visibilityInKm > 5) return "Good: Easily navigable.";
+    if (visibilityInKm > 2) return "Moderate: Some limitations.";
+    if (visibilityInKm <= 2) return "Poor: Restricted and unclear.";
+    return "Unavailable: Visibility data not available.";
   };
 
  export const getPressureDescription = (pressure: number) => {
-    if (pressure < 1000) return "Very low pressure";
+    if (pressure < 1000) return "Very low pressure.";
 
     if (pressure >= 1000 && pressure < 1015)
       return "Low pressure. Expect weather changes.";
@@ -75,14 +76,14 @@ export const getVisibilityDescription = (visibility: number) => {
 
     if (pressure >= 1040) return "Very high pressure. Expect weather changes.";
 
-    return "Unavailable pressure data";
+    return "Unavailable pressure data.";
   };
 
 export const uvIndexCategory = (uvIndex: number) => {
   if (uvIndex <= 2) {
     return {
       text: "Low",
-      protection: "No protection required",
+      protection: "No protection required.",
     };
   } else if (uvIndex <= 5) {
     return {
@@ -154,3 +155,4 @@ export const airQulaityIndexText = [
     description: "very poor",
   },
 ];
+
