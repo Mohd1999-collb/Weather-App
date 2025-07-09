@@ -1,5 +1,4 @@
 import moment from "moment";
-import { useGlobalContextUpdate } from "../Context/globalContext";
 
 export const kelvinToCelsius = (kelvin: number): number => {
   return Math.round(kelvin - 273.15);
@@ -10,6 +9,10 @@ export const unixToTime = (unix: number, timezone: number) => {
     .unix(unix)
     .utcOffset(timezone / 60)
     .format("HH:mm");
+};
+
+export const unixToDay = (unix: number) => {
+  return moment.unix(unix).format("dddd");
 };
 
 export const formatNumber = (num: number) => {
@@ -53,31 +56,31 @@ export const getHumidityText = (humidity: number) => {
 };
 
 export const getVisibilityDescription = (visibility: number) => {
-    const visibilityInKm = Math.round(visibility / 1000);
+  const visibilityInKm = Math.round(visibility / 1000);
 
-    if (visibilityInKm > 10) return "Excellent: Clear and vast view.";
-    if (visibilityInKm > 5) return "Good: Easily navigable.";
-    if (visibilityInKm > 2) return "Moderate: Some limitations.";
-    if (visibilityInKm <= 2) return "Poor: Restricted and unclear.";
-    return "Unavailable: Visibility data not available.";
-  };
+  if (visibilityInKm > 10) return "Excellent: Clear and vast view.";
+  if (visibilityInKm > 5) return "Good: Easily navigable.";
+  if (visibilityInKm > 2) return "Moderate: Some limitations.";
+  if (visibilityInKm <= 2) return "Poor: Restricted and unclear.";
+  return "Unavailable: Visibility data not available.";
+};
 
- export const getPressureDescription = (pressure: number) => {
-    if (pressure < 1000) return "Very low pressure.";
+export const getPressureDescription = (pressure: number) => {
+  if (pressure < 1000) return "Very low pressure.";
 
-    if (pressure >= 1000 && pressure < 1015)
-      return "Low pressure. Expect weather changes.";
+  if (pressure >= 1000 && pressure < 1015)
+    return "Low pressure. Expect weather changes.";
 
-    if (pressure >= 1015 && pressure < 1025)
-      return "Normal pressure. Expect weather changes.";
+  if (pressure >= 1015 && pressure < 1025)
+    return "Normal pressure. Expect weather changes.";
 
-    if (pressure >= 1025 && pressure < 1040)
-      return "High pressure. Expect weather changes.";
+  if (pressure >= 1025 && pressure < 1040)
+    return "High pressure. Expect weather changes.";
 
-    if (pressure >= 1040) return "Very high pressure. Expect weather changes.";
+  if (pressure >= 1040) return "Very high pressure. Expect weather changes.";
 
-    return "Unavailable pressure data.";
-  };
+  return "Unavailable pressure data.";
+};
 
 export const uvIndexCategory = (uvIndex: number) => {
   if (uvIndex <= 2) {
@@ -156,3 +159,27 @@ export const airQulaityIndexText = [
   },
 ];
 
+export const processData = (
+  dailyData: {
+    main: { temp_min: number; temp_max: number };
+    dt: number;
+  }[]
+) => {
+  let minTemp = Number.MAX_VALUE;
+  let maxTemp = Number.MIN_VALUE;
+  dailyData.forEach(
+    (day: { main: { temp_min: number; temp_max: number }; dt: number }) => {
+      if (day.main.temp_min < minTemp) {
+        minTemp = day.main.temp_min;
+      }
+      if (day.main.temp_max > maxTemp) {
+        maxTemp = day.main.temp_max;
+      }
+    }
+  );
+  return {
+    day: unixToDay(dailyData[0].dt),
+    minTemp: kelvinToCelsius(minTemp),
+    maxTemp: kelvinToCelsius(maxTemp),
+  };
+};

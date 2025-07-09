@@ -47,17 +47,7 @@ export const GlobalContextProvider = ({ children }) => {
             const response = await axios.get(`/api/fiveday?lat=${lat}&lon=${lon}`);            
             setFiveDaysForecast(response.data);
         } catch (error) {
-            console.error("Error fetching air quality data:", error.message);
-        }
-    }
-
-    // Function to fetch the geocoded state   
-    const fetchGGeoCodedList = async (search) => {
-        try {
-            const response = axios.get(`${URI}/geocoded?search=${search}&appid=${API_KEY}`);
-            setGeoCodedList(response.data);
-        } catch (error) {
-            console.error("Error fetching geocoded data:", error.message);
+            console.error("Error fetching five day forecast data:", error.message);
         }
     }
 
@@ -68,6 +58,17 @@ export const GlobalContextProvider = ({ children }) => {
             setUvIndex(response.data);
         } catch (error) {
             console.error("Error fetching uv data:", error.message);
+        }
+    }
+
+
+     // Function to fetch the geocoded state   
+    const fetchGGeoCodedList = async (search) => {
+        try {
+            const response = axios.get(`${URI}/geocoded?search=${search}&appid=${API_KEY}`);
+            setGeoCodedList(response.data);
+        } catch (error) {
+            console.error("Error fetching geocoded data:", error.message);
         }
     }
 
@@ -85,8 +86,8 @@ export const GlobalContextProvider = ({ children }) => {
     useEffect(() => {
         fetchForecast(activeCityCoords[0], activeCityCoords[1]);
         fetchAirQuality(activeCityCoords[0], activeCityCoords[1]);
-        fetchFiveDaysForecast(activeCityCoords[0], activeCityCoords[1]);
         fetchUvIndex(activeCityCoords[0], activeCityCoords[1]);
+        fetchFiveDaysForecast(activeCityCoords[0], activeCityCoords[1]);
     }, [])
 
 
