@@ -16,7 +16,7 @@ const Navbar = () => {
         <SearchDialog />
         <div className="btn-group flex items-center gap-2">
           <ThemeDropDown />
-          <Button
+          {/* <Button
             className="source-code-btn flex items-center gap-2"
             onClick={() => {
               router.push(
@@ -25,7 +25,7 @@ const Navbar = () => {
             }}
           >
             {github} Source Code
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

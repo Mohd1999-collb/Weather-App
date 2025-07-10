@@ -25,7 +25,7 @@ const FiveDayForecast = () => {
         justify-between dark:bg-dark-grey shadow-sm dark:shadow-none"
     >
       <h2 className="flex items-center gap-2 font-medium">
-        {calender} 5 Day Forecast for {city.name}
+        {calender} 5 Days Forecast of {city.name}
       </h2>
 
       <div className="forecast-list pt-3">

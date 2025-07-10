@@ -10,7 +10,6 @@ export const GET = async (req: NextRequest) => {
     const lon = searchParams.get("lon");
     const url = `${URI}/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
     const res = await axios.get(url);
-    console.log("data from route.ts ---> ", res);
     return NextResponse.json(res.data);
   } catch (error) {
     console.log("Error fetching forecast data");

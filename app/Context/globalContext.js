@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
 import defaultStates from '../utils/defaultStates'
+import { debounce } from "lodash";
 
 
 // Create the empty global obeject context
@@ -10,8 +11,6 @@ const GlobalContextUpdate = createContext();
 
 // Create a provider component
 export const GlobalContextProvider = ({ children }) => {
-    const API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
-    const URI = process.env.NEXT_PUBLIC_BASE_URL;
 
     const [forecast, setForecast] = useState({});
     const [geoCodedList, setGeoCodedList] = useState(defaultStates);
@@ -22,7 +21,7 @@ export const GlobalContextProvider = ({ children }) => {
     const [uvIndex, setUvIndex] = useState({});
 
     // Function to fetch the forecast state
-    const fetchForecast = async (lat, lon) => {   
+    const fetchForecast = async (lat, lon) => {
         try {
             const response = await axios.get(`/api/weather?lat=${lat}&lon=${lon}`);
             setForecast(response.data);
@@ -43,8 +42,8 @@ export const GlobalContextProvider = ({ children }) => {
 
     // Function to fetch the five days forecast state   
     const fetchFiveDaysForecast = async (lat, lon) => {
-         try {
-            const response = await axios.get(`/api/fiveday?lat=${lat}&lon=${lon}`);            
+        try {
+            const response = await axios.get(`/api/fiveday?lat=${lat}&lon=${lon}`);
             setFiveDaysForecast(response.data);
         } catch (error) {
             console.error("Error fetching five day forecast data:", error.message);
@@ -61,11 +60,10 @@ export const GlobalContextProvider = ({ children }) => {
         }
     }
 
-
-     // Function to fetch the geocoded state   
-    const fetchGGeoCodedList = async (search) => {
+    // Function to fetch the geocoded state   
+    const fetchGeoCodedList = async (search) => {
         try {
-            const response = axios.get(`${URI}/geocoded?search=${search}&appid=${API_KEY}`);
+            const response = await axios.get(`api/geocoded?search=${search}`);
             setGeoCodedList(response.data);
         } catch (error) {
             console.error("Error fetching geocoded data:", error.message);
@@ -75,20 +73,32 @@ export const GlobalContextProvider = ({ children }) => {
     // Function to handel userinput  
     const handleInput = async (e) => {
         setInputValue(e.target.value);
-        // Calling the function
         if (e.target.value === "") {
-            // debounce function for optimization
-            setInputValue(defaultStates);
+            setGeoCodedList(defaultStates)
         }
     }
-
-
+    
+    
     useEffect(() => {
         fetchForecast(activeCityCoords[0], activeCityCoords[1]);
         fetchAirQuality(activeCityCoords[0], activeCityCoords[1]);
         fetchUvIndex(activeCityCoords[0], activeCityCoords[1]);
         fetchFiveDaysForecast(activeCityCoords[0], activeCityCoords[1]);
-    }, [])
+    }, [activeCityCoords])
+    
+    useEffect(() => {
+        // debounce function for optimization
+        const debouncedFetch = debounce((search) => {
+            fetchGeoCodedList(search);
+        }, 500);
+
+        if (inputValue) {
+            debouncedFetch(inputValue);
+        }
+
+        // cleanup
+        return () => debouncedFetch.cancel();
+    }, [inputValue]);
 
 
     return (
@@ -97,11 +107,13 @@ export const GlobalContextProvider = ({ children }) => {
                 forecast,
                 airQuality,
                 fiveDaysForecast,
-                uvIndex,
                 geoCodedList,
                 inputValue,
                 handleInput,
-                setActiveCityCoords
+                uvIndex,
+                setActiveCityCoords,
+                setInputValue,
+                setGeoCodedList
             }}>
             <GlobalContextUpdate.Provider value={{ setActiveCityCoords }}>
                 {children}
