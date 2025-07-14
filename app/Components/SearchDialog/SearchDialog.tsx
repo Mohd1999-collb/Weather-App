@@ -9,30 +9,14 @@ import { commandIcon } from "@/app/utils/Icons";
 import { Button } from "@/components/ui/button";
 import {
   Command,
-  CommandEmpty,
-  CommandGroup,
   CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Calculator,
-  Calendar,
-  CreditCardIcon,
-  Settings,
-  Smile,
-  User,
-} from "lucide-react";
 import React from "react";
 
 function SearchDialog() {
@@ -55,7 +39,7 @@ function SearchDialog() {
             variant="outline"
             className="border inline-flex items-center justify-center text-sm font-medium hover:dark:bg-[#131313] hover:bg-slate-100  ease-in-out duration-200"
           >
-            <div className="command dark:bg-[#262626] bg-slate-200  py-[2px] pl-[5px] pr-[7px] rounded-sm ml-[10rem] flex items-center gap-2">
+            <div className="command dark:bg-[#262626] bg-slate-200  py-[2px] pl-[5px] pr-[7px] rounded-sm ml-[10rem] flex items-center  gap-2">
               {commandIcon}
               <span className="text-[9px]">F</span>
             </div>
@@ -63,7 +47,6 @@ function SearchDialog() {
           </Button>
         </DialogTrigger>
         <DialogTitle></DialogTitle>
-
         <DialogContent className="p-0">
           <Command className="rounded-lg border shadow-md md:min-w-[450px]">
             <CommandInput
@@ -107,52 +90,6 @@ function SearchDialog() {
                   }
                 )}
             </ul>
-
-            {/* <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
-              {geoCodedList?.length === 0 ||
-                (!geoCodedList && <p>No Results</p>)}
-              <CommandGroup heading="Suggestions">
-                {geoCodedList &&
-                  geoCodedList.map(
-                    (
-                      item: {
-                        name: string;
-                        country: string;
-                        state: string;
-                        lat: number;
-                        lon: number;
-                      },
-                      index: number
-                    ) => {
-                      return (
-                        <CommandItem
-                          key={index}
-                          onMouseEnter={() => setHoveredIndex(index)}
-                          className={`py-3 px-2 text-sm  rounded-sm cursor-default
-                        ${hoveredIndex === index ? "bg-accent" : ""}
-                      `}
-                          // onClick={() => {
-                          //   getClickedCoords(item.lat, item.lon);
-                          // }}
-                          // onClick={() => {
-                          //   getClickedCoords(item.lat, item.lon);
-                          // }}
-                        >
-                          <span onClick={() => {
-                            getClickedCoords(item.lat, item.lon);
-                          }}>
-                            {item.name}, {item.state && item.state + ","}{" "}
-                            {item.country}
-                          </span>
-                        </CommandItem>
-                      
-                      );
-                    }
-                  )}
-              </CommandGroup>
-              
-            </CommandList> */}
           </Command>
         </DialogContent>
       </Dialog>
@@ -161,3 +98,135 @@ function SearchDialog() {
 }
 
 export default SearchDialog;
+
+
+
+
+// "use client";
+
+// import {
+//   useGlobalContext,
+//   useGlobalContextUpdate,
+// } from "@/app/Context/globalContext";
+// import defaultStates from "@/app/utils/defaultStates";
+// import { commandIcon } from "@/app/utils/Icons";
+// import { Button } from "@/components/ui/button";
+// import {
+//   Command,
+//   CommandInput,
+// } from "@/components/ui/command";
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogTitle,
+//   DialogTrigger,
+// } from "@/components/ui/dialog";
+// import React from "react";
+
+// function SearchDialog() {
+//   const {
+//     geoCodedList,
+//     inputValue,
+//     handleInput,
+//     setInputValue,
+//     setGeoCodedList,
+//   } = useGlobalContext();
+//   const { setActiveCityCoords } = useGlobalContextUpdate();
+
+//   const [hoveredIndex, setHoveredIndex] = React.useState<number>(0);
+
+//   const getClickedCoords = (lat: number, lon: number) => {
+//     setActiveCityCoords([lat, lon]);
+//     setInputValue("");
+//     setGeoCodedList(defaultStates);
+//   };
+
+//   return (
+//     <div className="search-btn">
+//       <Dialog>
+//         <DialogTrigger asChild>
+//           <Button
+//             variant="outline"
+//             className="
+//               border
+//               inline-flex items-center justify-center
+//               text-sm font-medium
+//               hover:dark:bg-[#131313] hover:bg-slate-100
+//               ease-in-out duration-200
+//               w-full sm:w-auto   /* responsive: full width on mobile, auto on bigger screens */
+//             "
+//           >
+//             <div
+//               className="
+//                 command dark:bg-[#262626] bg-slate-200
+//                 py-[2px] pl-[5px] pr-[7px] rounded-sm
+//                 ml-0 sm:ml-[2rem] md:ml-[4rem] lg:ml-[10rem]
+//                 flex items-center gap-2
+//               "
+//             >
+//               {commandIcon}
+//               <span className="text-[9px]">F</span>
+//             </div>
+//             <p className="text-xs sm:text-sm text-muted-foreground">
+//               Search Here...
+//             </p>
+//           </Button>
+//         </DialogTrigger>
+//         <DialogTitle></DialogTitle>
+
+//         <DialogContent className="p-0 max-w-full sm:max-w-[90%] md:max-w-[450px]">
+//           <Command className="rounded-lg border shadow-md w-full">
+//             <CommandInput
+//               value={inputValue}
+//               onChangeCapture={handleInput}
+//               placeholder="Type a command or search..."
+//             />
+
+//             <ul className="px-3 pb-2 max-h-[300px] overflow-auto">
+//               <p className="p-2 text-sm text-muted-foreground">Suggestions</p>
+
+//               {(geoCodedList?.length === 0 || !geoCodedList) && (
+//                 <p className="px-2 text-muted-foreground">No Results</p>
+//               )}
+
+//               {geoCodedList &&
+//                 geoCodedList.map(
+//                   (
+//                     item: {
+//                       name: string;
+//                       country: string;
+//                       state: string;
+//                       lat: number;
+//                       lon: number;
+//                     },
+//                     index: number
+//                   ) => {
+//                     const { country, state, name } = item;
+//                     return (
+//                       <li
+//                         key={index}
+//                         onMouseEnter={() => setHoveredIndex(index)}
+//                         className={`
+//                           py-3 px-2 text-sm rounded-sm cursor-pointer
+//                           ${hoveredIndex === index ? "bg-accent" : ""}
+//                         `}
+//                         onClick={() => {
+//                           getClickedCoords(item.lat, item.lon);
+//                         }}
+//                       >
+//                         <p className="truncate">
+//                           {name}, {state && state + ","} {country}
+//                         </p>
+//                       </li>
+//                     );
+//                   }
+//                 )}
+//             </ul>
+//           </Command>
+//         </DialogContent>
+//       </Dialog>
+//     </div>
+//   );
+// }
+
+// export default SearchDialog;

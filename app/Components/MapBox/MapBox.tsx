@@ -14,14 +14,15 @@ const MapBox = () => {
 
   if (
     !forecast ||
+    !forecast.name ||
     !forecast?.coord ||
     !forecast?.coord?.lat ||
     !forecast?.coord?.lon
   ) {
     return <Skeleton className="h-[12rem] w-full" />;
   }
-
   const activeCityCords = forecast.coord;
+  const city = forecast.name;
 
   return (
     <div
@@ -30,7 +31,7 @@ const MapBox = () => {
         padding: "1rem",
       }}
     >
-      <MapBoxContent activeCityCords={activeCityCords} />
+      <MapBoxContent activeCityCords={activeCityCords} city={city}/>
     </div>
   );
 };
