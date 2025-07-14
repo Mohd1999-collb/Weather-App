@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
 import moment from "moment";
+import { forecastFlake } from "@/app/utils/Icons";
 import React from "react";
 
 const DailyForecast = () => {
@@ -66,6 +67,8 @@ const DailyForecast = () => {
       className="pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8
        dark:bg-dark-grey shadow-sm dark:shadow-none col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-2"
     >
+
+       <h2 className="flex items-center gap-2 font-medium">{forecastFlake} Daily Forecast</h2>
       <div className="h-full flex gap-10 overflow-hidden">
         {todayForecast.length < 1 ? (
           <div className="flex justify-center items-center">
@@ -75,21 +78,20 @@ const DailyForecast = () => {
           </div>
         ) : (
           <div className="w-full">
-            <Carousel>
-                
+            <Carousel>                
               <CarouselContent>
                 {todayForecast.map(
                   ( forecast: { dt_text: string; main: { temp: number } }, index:number) => {
                     return (
                       <CarouselItem
                         key={index}
-                        className="flex flex-col gap-4 basis-[8.5rem] cursor-grab"
+                        className="flex flex-col gap-2 basis-[8.5rem] cursor-grab"
                       >
                         <p className="text-gray-300">
                           {moment(forecast.dt_text).format("HH:mm")}
                         </p>
-                        <p>{getIcon()}</p>
-                        <p className="mt-4">
+                        <p >{getIcon()}</p>
+                        <p>
                           {kelvinToCelsius(forecast.main.temp)}°C
                         </p>
                       </CarouselItem>

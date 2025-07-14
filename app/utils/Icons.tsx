@@ -18,6 +18,7 @@ import {
   UsersRound,
   CalendarDays,
   SunDim,
+  ThermometerSnowflake 
 } from "lucide-react";
 
 export const commandIcon = <Command size={14} />;
@@ -39,3 +40,4 @@ export const eye = <Eye size={15} />;
 export const people = <UsersRound size={15} />;
 export const calender = <CalendarDays size={15} />;
 export const sun = <SunDim size={15} />;
+export const forecastFlake = <ThermometerSnowflake size={15} />;

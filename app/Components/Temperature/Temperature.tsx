@@ -27,7 +27,7 @@ const Temperature = () => {
     if (!forecast) return; // Don't run effect if forecast is unavailable
     const interval = setInterval(() => {
       const localMoment = moment().utcOffset(timezone / 60);
-      const formattedTime = localMoment.format("HH:mm:ss");
+      const formattedTime = localMoment.format("HH : mm : ss");
       const day = localMoment.format("dddd");
       setLocalTime(formattedTime);
       setCurrentDay(day);
@@ -64,20 +64,21 @@ const Temperature = () => {
         justify-between dark:bg-dark-grey shadow-sm dark:shadow-none"
     >
       <p className="flex justify-between items-center">
-        <span className="font-medium">{currentDay}</span>
-        <span className="font-medium">{localTime}</span>
+        <span className="font-medium text-xl bg-gradient-to-r from-orange-600 via-yellow-500 to-indigo-400 inline-block text-transparent bg-clip-text">{currentDay}</span>
+        <span className="font-medium text-2xl bg-gradient-to-r from-red-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">{localTime}</span>
       </p>
       <p className="pt-2 font-bold flex gap-1">
-        <span>{name}</span>
+        <span className="bg-gradient-to-r from-blue-600 via-green-400 to-amber-400 inline-block text-transparent bg-clip-text">{name}</span>
         <span>{navigation}</span>
       </p>
-      <p className="py-10 text-9xl font-bold self-center">{temp}°</p>
-      <div>
+      <p className="py-10 text-9xl font-bold self-center 
+      bg-gradient-to-r from-yellow-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">{temp}°</p>
+      <div >
         <div>
-          <span>{getIcon()}</span>
-          <p className="pt-2 capitalize text-lg font-medium">{description}</p>
+          <span className="text-green-400" >{getIcon()}</span>
+          <p className="pt-2 capitalize text-lg font-medium bg-gradient-to-r from-green-600 via-red-500 to-cyan-400 inline-block text-transparent bg-clip-text">{description}</p>
         </div>
-        <p className="flex items-center gap-2">
+        <p className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 via-red-500 to-indigo-400 text-transparent bg-clip-text">
           <span>Low: {minTemp}°</span>
           <span>High: {maxTemp}°</span>
         </p>

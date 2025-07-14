@@ -25,7 +25,7 @@ const MapBox = () => {
 
   return (
     <div
-      className="flex flex-1 items-center content-center basis-[50%] border rounded-lg"
+      className="flex flex-1 items-center content-center basis-[52%] border rounded-lg"
       style={{
         padding: "1rem",
       }}
