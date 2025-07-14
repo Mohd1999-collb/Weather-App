@@ -22,20 +22,20 @@ const Wind = () => {
       <div className="compass relative flex items-center justify-center">
         <div className="image relative">
           <Image
-            src="/compass_body.svg"
+            src="/compass_body.png"
             alt="compass"
             width={125}
             height={125}
           />
           <Image
-            src="/compass_arrow.svg"
+            src="/compass_arrow.png"
             alt="arrow"
             width={9}
             height={9}
-            className="absolute top-0 left-[47%] transition-all duration-500 ease-in-out dark:invert"
+            className="absolute top-6 left-[45%] transition-all duration-500 ease-in-out dark:invert"
             style={{
               transform: `rotate(${windDirection}deg) translate(-50%)`,
-              height: "110%",
+              height: "60%",
             }}
           />
         </div>
