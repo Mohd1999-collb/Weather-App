@@ -1,8 +1,8 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest) => {  
-   try {
+export const GET = async (req: NextRequest) => {
+  try {
     const API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
     const URI = process.env.NEXT_PUBLIC_BASE_URL;
     const searchParams = req.nextUrl.searchParams;
@@ -15,4 +15,4 @@ export const GET = async (req: NextRequest) => {
     console.log("Error fetching forecast data");
     return new Response("Error fetching forecast data", { status: 500 });
   }
-}
+};

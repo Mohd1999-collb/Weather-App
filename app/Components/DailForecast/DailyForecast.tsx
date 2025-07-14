@@ -1,13 +1,10 @@
 "use client";
 import { useGlobalContext } from "@/app/Context/globalContext";
-import { clearSky, cloudy, drizzleIcon, rain, snow } from "@/app/utils/Icons";
-import { kelvinToCelsius } from "@/app/utils/misc";
+import { getIcon, kelvinToCelsius } from "@/app/utils/misc";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
 import moment from "moment";
@@ -30,14 +27,12 @@ const DailyForecast = () => {
     var { main: weatherMain } = weather[0];
   }
 
-  
   const todayString = moment().format("YYYY-MM-DD");
-  
-  //   Filter the list today forecast
+
   const todayForecast = list.filter(
-      (forecast: { dt_txt: string; main: { temp: number } }) =>
-        forecast.dt_txt.startsWith(todayString)
-    );
+    (forecast: { dt_txt: string; main: { temp: number } }) =>
+      forecast.dt_txt.startsWith(todayString)
+  );
 
   if (todayForecast.length < 1) {
     return (
@@ -45,30 +40,14 @@ const DailyForecast = () => {
     );
   }
 
-  const getIcon = () => {
-    switch (weatherMain) {
-      case "Drizzle":
-        return drizzleIcon;
-      case "Rain":
-        return rain;
-      case "Snow":
-        return snow;
-      case "Clear":
-        return clearSky;
-      case "Clouds":
-        return cloudy;
-      default:
-        return clearSky;
-    }
-  };
-
   return (
     <div
       className="pt-6 px-4 h-[12rem] border rounded-lg flex flex-col gap-8
        dark:bg-dark-grey shadow-sm dark:shadow-none col-span-full sm-2:col-span-2 md:col-span-2 xl:col-span-2"
     >
-
-       <h2 className="flex items-center gap-2 font-medium">{forecastFlake} Daily Forecast</h2>
+      <h2 className="flex items-center gap-2 font-medium">
+        {forecastFlake} Daily Forecast
+      </h2>
       <div className="h-full flex gap-10 overflow-hidden">
         {todayForecast.length < 1 ? (
           <div className="flex justify-center items-center">
@@ -78,10 +57,13 @@ const DailyForecast = () => {
           </div>
         ) : (
           <div className="w-full">
-            <Carousel>                
+            <Carousel>
               <CarouselContent>
                 {todayForecast.map(
-                  ( forecast: { dt_text: string; main: { temp: number } }, index:number) => {
+                  (
+                    forecast: { dt_text: string; main: { temp: number } },
+                    index: number
+                  ) => {
                     return (
                       <CarouselItem
                         key={index}
@@ -90,16 +72,13 @@ const DailyForecast = () => {
                         <p className="text-gray-300">
                           {moment(forecast.dt_text).format("HH:mm")}
                         </p>
-                        <p >{getIcon()}</p>
-                        <p>
-                          {kelvinToCelsius(forecast.main.temp)}°C
-                        </p>
+                        <p>{getIcon(weatherMain)}</p>
+                        <p>{kelvinToCelsius(forecast.main.temp)}°C</p>
                       </CarouselItem>
                     );
                   }
                 )}
               </CarouselContent>
-              
             </Carousel>
           </div>
         )}

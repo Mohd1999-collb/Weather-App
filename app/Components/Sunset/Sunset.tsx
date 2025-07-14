@@ -3,7 +3,6 @@ import { useGlobalContext } from "@/app/Context/globalContext";
 import { sunset } from "@/app/utils/Icons";
 import { unixToTime } from "@/app/utils/misc";
 import { Skeleton } from "@/components/ui/skeleton";
-import { timeStamp } from "console";
 import React from "react";
 
 const Sunset = () => {

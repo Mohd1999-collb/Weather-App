@@ -31,7 +31,7 @@ const MapBox = () => {
         padding: "1rem",
       }}
     >
-      <MapBoxContent activeCityCords={activeCityCords} city={city}/>
+      <MapBoxContent activeCityCords={activeCityCords} city={city} />
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import moment from "moment";
 
+import { cloudy, drizzleIcon, rain, snow, clearSky } from "./Icons";
+
 export const kelvinToCelsius = (kelvin: number): number => {
   return Math.round(kelvin - 273.15);
 };
@@ -157,8 +159,8 @@ export const airQulaityIndexText = [
     rating: 100,
     description: "very poor",
   },
+  
 ];
-
 export const processData = (
   dailyData: {
     main: { temp_min: number; temp_max: number };
@@ -182,4 +184,21 @@ export const processData = (
     minTemp: kelvinToCelsius(minTemp),
     maxTemp: kelvinToCelsius(maxTemp),
   };
+};
+
+export const getIcon = (weatherMain: string) => {
+  switch (weatherMain) {
+    case "Drizzle":
+      return drizzleIcon;
+    case "Rain":
+      return rain;
+    case "Snow":
+      return snow;
+    case "Clear":
+      return clearSky;
+    case "Clouds":
+      return cloudy;
+    default:
+      return clearSky;
+  }
 };

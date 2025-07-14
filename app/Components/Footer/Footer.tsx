@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="py-4 flex justify-center pb-8">
+    <div className="py-4 flex justify-center">
       <p className="footer-text text-sm flex items-center gap-1">
         Made By
         <Image src={"/logo.png"} alt="logo" width={30} height={30} />

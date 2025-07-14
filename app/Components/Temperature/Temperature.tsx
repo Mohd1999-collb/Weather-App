@@ -1,17 +1,10 @@
 "use client";
 import { useGlobalContext } from "@/app/Context/globalContext";
-import { kelvinToCelsius } from "@/app/utils/misc";
+import { getIcon, kelvinToCelsius } from "@/app/utils/misc";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import {
-  cloudy,
-  drizzleIcon,
-  navigation,
-  rain,
-  snow,
-  clearSky,
-} from "@/app/utils/Icons";
 import { Skeleton } from "@/components/ui/skeleton";
+import { navigation } from "@/app/utils/Icons";
 
 const Temperature = () => {
   const { forecast } = useGlobalContext();
@@ -36,27 +29,12 @@ const Temperature = () => {
   }, [forecast]);
 
   if (!forecast || !forecast?.weather) {
-    return <Skeleton className="h-96 w-full border border-gray-500 rounded-lg" />;    
+    return (
+      <Skeleton className="h-96 w-full border border-gray-500 rounded-lg" />
+    );
   } else {
     var { main: weatherMain, description } = weather[0];
   }
-
-  const getIcon = () => {
-    switch (weatherMain) {
-      case "Drizzle":
-        return drizzleIcon;
-      case "Rain":
-        return rain;
-      case "Snow":
-        return snow;
-      case "Clear":
-        return clearSky;
-      case "Clouds":
-        return cloudy;
-      default:
-        return clearSky;
-    }
-  };
 
   return (
     <div
@@ -64,19 +42,31 @@ const Temperature = () => {
         justify-between dark:bg-dark-grey shadow-sm dark:shadow-none"
     >
       <p className="flex justify-between items-center">
-        <span className="font-medium text-xl bg-gradient-to-r from-orange-600 via-yellow-500 to-indigo-400 inline-block text-transparent bg-clip-text">{currentDay}</span>
-        <span className="font-medium text-2xl bg-gradient-to-r from-red-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">{localTime}</span>
+        <span className="font-medium text-xl bg-gradient-to-r from-orange-600 via-yellow-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+          {currentDay}
+        </span>
+        <span className="font-medium text-2xl bg-gradient-to-r from-red-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+          {localTime}
+        </span>
       </p>
       <p className="pt-2 font-bold flex gap-1">
-        <span className="bg-gradient-to-r from-blue-600 via-green-400 to-amber-400 inline-block text-transparent bg-clip-text">{name}</span>
+        <span className="bg-gradient-to-r from-blue-600 via-green-400 to-amber-400 inline-block text-transparent bg-clip-text">
+          {name}
+        </span>
         <span>{navigation}</span>
       </p>
-      <p className="py-10 text-9xl font-bold self-center 
-      bg-gradient-to-r from-yellow-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">{temp}°</p>
-      <div >
+      <p
+        className="py-10 text-9xl font-bold self-center 
+      bg-gradient-to-r from-yellow-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text"
+      >
+        {temp}°
+      </p>
+      <div>
         <div>
-          <span className="text-green-400" >{getIcon()}</span>
-          <p className="pt-2 capitalize text-lg font-medium bg-gradient-to-r from-green-600 via-red-500 to-cyan-400 inline-block text-transparent bg-clip-text">{description}</p>
+          <span className="text-green-400">{getIcon(weatherMain)}</span>
+          <p className="pt-2 capitalize text-lg font-medium bg-gradient-to-r from-green-600 via-red-500 to-cyan-400 inline-block text-transparent bg-clip-text">
+            {description}
+          </p>
         </div>
         <p className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 via-red-500 to-indigo-400 text-transparent bg-clip-text">
           <span>Low: {minTemp}°</span>

@@ -28,11 +28,10 @@ const UvIndex = () => {
             </span>
           </p>
           <UvProgress
-          value={marginLeftPercentage}
-          max={14}
-          className="progress mt-3.5"
+            value={marginLeftPercentage}
+            max={14}
+            className="progress mt-3.5"
           />
-
         </div>
       </div>
       <p className="text-sm">{uvIndexCategory(uvIndexMax).protection}</p>
