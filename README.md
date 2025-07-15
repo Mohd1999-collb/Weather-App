@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🌦Weather App
+Built with Next.js, styled using Tailwind CSS, and powered by OpenWeatherMap API, this responsive weather app – Live Demo (https://mohd-talib-weather-app.vercel.app/) – delivers real-time weather updates with a clean, user-friendly interface. The app fetches current weather data, forecasts, and key climate metrics, optimized for mobile and desktop devices to enhance user experience and performance.
 
-## Getting Started
+<img width="1335" height="488" alt="image" src="https://github.com/user-attachments/assets/61f964a9-9632-427d-b052-de56ee6aba12" />
 
-First, run the development server:
+<img width="1353" height="633" alt="image" src="https://github.com/user-attachments/assets/98f0264d-c19d-486c-91da-73b8a9d0d62b" />
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✅ Key Features:
+    1. Real-time weather data integration using OpenWeatherMap API.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    2. Fully responsive design with Tailwind CSS for mobile, tablet, and desktop.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    3. Dark mode toggle for enhanced user experience and accessibility.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    4. Server-side rendering with Next.js for faster load times and better SEO.
 
-## Learn More
+    5. Displays temperature, humidity, wind speed, UV index, air quality, and extended forecasts.
 
-To learn more about Next.js, take a look at the following resources:
+    6. Interactive city search with dynamic map view to show weather by location.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    7. Modular, scalable codebase with reusable components for easier maintenance.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    8. Optimized image loading and minimalist design for smooth performance.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
